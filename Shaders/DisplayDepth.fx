@@ -336,11 +336,11 @@ float GetLinearizedDepth(float2 texcoord)
         if (iUILogarithmic) // RESHADE_DEPTH_INPUT_IS_LOGARITHMIC
             depth = (exp(depth * log(C + 1.0)) - 1.0) / C;
 
-        if (iUIReversed) // RESHADE_DEPTH_INPUT_IS_REVERSED
-            depth = 1.0 - depth;
-
         const float N = 1.0;
         depth /= fUIFarPlane - depth * (fUIFarPlane - N);
+
+        if (iUIReversed) // RESHADE_DEPTH_INPUT_IS_REVERSED
+            depth = 1.0 - depth;
 
         return depth;
     }
